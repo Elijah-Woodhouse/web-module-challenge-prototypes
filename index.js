@@ -3,21 +3,51 @@
 
 /*
   TASK 1
-    - Write a Person Constructor that initializes `name` and `age` from arguments.
-    - All instances of Person should initialize with an empty `stomach` array.
+    - Write a Person Constructor that initializes `name` and `age`
+    from arguments.
+    - All instances of Person should initialize with an empty `stomach`
+    array.
     - Give instances of Person the ability to `.eat("someFood")`:
-        + .eat() should recieve a string as a parameter and take some type of edible as an argument
-        + When eating an edible, it should be pushed into the `stomach` array.
-        + The `eat` method should have no effect if there are 10 items in the `stomach` array.
+        + .eat() should recieve a string as a parameter and take some
+        type of edible as an argument
+        + When eating an edible, it should be pushed into the `stomach`
+        array.
+        + The `eat` method should have no effect if there are 10
+        items in the `stomach` array.
     - Give instances of Person the ability to `.poop()`:
         + When an instance poops, its `stomach` array should be empty.
     - Give instances of Person a method `.toString()`:
-        + It should return a string with `name` and `age`. Example: "Mary, 50"
+        + It should return a string with `name` and `age`.
+        Example: "Mary, 50"
 */
 
-function Person() {
-
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
+  this.toString = function(){
+    return `${this.name}, ${this.age}`
+  }
 }
+
+Person.prototype.eat = function(item){
+  if (this.stomach.length < 10){
+    this.stomach.push(item);
+  } else {
+  }
+}
+
+Person.prototype.poop = function(){
+  this.stomach = [];
+}
+
+const person1 = new Person("Winona", 55);
+console.log(person1.toString());
+person1.eat("brownie");
+person1.eat("thai food");
+console.log(person1.stomach);
+person1.poop();
+console.log(person1.stomach);
 
 
 /*
@@ -36,10 +66,32 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-
+function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
 }
 
+Car.prototype.fill = function(gallons){
+  this.tank += gallons;
+}
+
+Car.prototype.drive = function(distance){
+  this.odometer += distance;
+  for (let i = 0; i < this.milesPerGallon; i++){
+    if (distance >= this.milesPerGallon){
+      this.tank -= this.milesPerGallon;
+    }
+  }
+  if (this.tank === 0){
+    return `I ran out of fuel at ${this.odometer} miles!`
+  }
+}
+
+const car1 = new Car("Honda", 30);
+car1.fill(25);
+console.log(car1.drive(100));
 
 /*
   TASK 3
@@ -54,13 +106,13 @@ function Baby() {
 }
 
 
-/* 
+/*
   TASK 4
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1.
+  2.
+  3.
+  4.
 */
 
 ///////// END OF CHALLENGE /////////
@@ -73,7 +125,7 @@ function foo(){
 foo();
 module.exports = {
   foo,
-  Person, 
+  Person,
   Car,
-  Baby
+  Baby,
 }
