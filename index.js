@@ -78,20 +78,27 @@ Car.prototype.fill = function(gallons){
 }
 
 Car.prototype.drive = function(distance){
-  this.odometer += distance;
-  for (let i = 0; i < this.milesPerGallon; i++){
-    if (distance >= this.milesPerGallon){
-      this.tank -= this.milesPerGallon;
+  var counter = 0;
+  for (let i = 0; i < distance; i++){
+    counter += 1;
+    this.odometer += 1;
+    if (counter === this.milesPerGallon){
+      counter = 0;
+      this.tank = this.tank - 1;
     }
-  }
-  if (this.tank === 0){
-    return `I ran out of fuel at ${this.odometer} miles!`
+    if (this.tank === 0){
+      return `I ran out of gas at ${this.odometer} miles!`
+    }
   }
 }
 
 const car1 = new Car("Honda", 30);
-car1.fill(25);
-console.log(car1.drive(100));
+const car2 = new Car("Toyota", 15);
+car2.fill(25);
+console.log(car2.drive(500));
+console.log(car2);
+
+
 
 /*
   TASK 3
@@ -101,11 +108,17 @@ console.log(car1.drive(100));
         + Should return a string "Playing with x", x being the favorite toy.
 */
 
-function Baby() {
-
+function Baby(name, age, favoriteToy) {
+  Person.call(this, name, age);
+  this.favoriteToy = favoriteToy;
 }
 
-
+const baby1 = new Baby("Tom", 4, "RC car");
+Baby.prototype.play = function(){
+  return `Playing with ${this.favoriteToy}`;
+}
+Baby.prototype.eat = Person.prototype.eat;
+Baby.prototype.poop = Person.prototype.poop;
 /*
   TASK 4
   In your own words explain the four principles for the "this" keyword below:
