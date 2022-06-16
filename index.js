@@ -122,10 +122,14 @@ Baby.prototype.poop = Person.prototype.poop;
 /*
   TASK 4
   In your own words explain the four principles for the "this" keyword below:
-  1.
-  2.
-  3.
-  4.
+  1. Default binding: "this" basically refers to the object itself. If the object is in the
+  global scope then "this" will refer to that global object.
+  2. implicit binding:  whatever is to the left of the dot is "this".
+  3. explicit binding: when you're instantiating an object usually using a function then
+  this is explicitely defined as the object which you just called.
+  you'd normall use call, apply and bind for explicit binding
+  4. New Binding: This is when you're creating an object specifically using the
+  "this" keyword as a key for attributes of an object.
 */
 
 ///////// END OF CHALLENGE /////////
